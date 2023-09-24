@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>chat</title>
+<style>
+    header {
+  border-style: groove;
+  border-width: 4px;
+  border-color: #151515;
+}
+header h2 {
+  color: purple;
+  padding-left: 13px;
+}
+#page {
+  box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.5);
+  max-width: 650px;
+  min-width: 645px;
+  margin: 0px auto;
+  font-size: 25px;
+  font-style: italic;
+}
+
+#corpope {
+  border-style: double;
+  border-width: 4px;
+  border-color: #151515;
+  padding: 7px 7px;
+}
+p {
+  padding: 2px 5px;
+  border-style: double;
+  border-radius: 8px;
+  width: 0 auto;
+}
+
+.container p {
+  margin-bottom: 10px;
+}
+.corpo {
+  padding: 10px 10px;
+  border-style: double;
+  border-width: 4px;
+  border-color: #151515;
+  border-radius: 5px;
+  height: 500px;
+  overflow: auto;
+}
+.rodape {
+  padding: 20px 20px;
+  display: inline-block;
+}
+input {
+  width: 450px;
+  height: 36px;
+  font-size: 25px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  padding: 1px 13px;
+  text-align: left;
+}
+
+button {
+  height: 43px;
+  width: 90px;
+  font-size: 18px;
+  color: green;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: #dcdcdc;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+button:hover {
+  background-color: black;
+  color: white;
+}
+.rodape div {
+  display: inline-block;
+}
+#lista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: end;
+  line-height: 30px;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: end;
+  line-height: 30px;
+}
+.container2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: start;
+  line-height: 30px;
+}
+
+h4 {
+  font-size: 30px;
+  line-height: 3px;
+  margin-bottom: 10px;
+}
+footer {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+}
+
+</style>
+</head>
+<body>
+    <div id="page">
+        <header>
+          <div>
+            <h2> Atendimento Online </h2>
+          </div>
+        </header>
+        <div id="corpope">
+          <div class="corpo">
+      
+            <main>
+              <div class="container2">
+                <h4> <strong> Atendente diz: </strong> </h4>
+                <div class="msg-at">
+                  <p> Bom dia </p>
+                </div>
+                <h4> <strong> Atendente diz: </strong> </h4>
+                <div class="msg-at">
+                  <p> Precisa de ajuda? </p>
+                </div>
+              </div>
+      
+              <div class="container">
+                <div class="vc">
+                  <h4> <strong> Você diz: </strong> </h4>
+                </div>
+                <div class="msg-vc">
+                  <p> Bom dia </p>
+                </div>
+                <div class="vc">
+                  <h4> <strong> Você diz: </strong> </h4>
+                </div>
+                <div class="msg-vc">
+                  <p> Preciso sim </p>
+                </div>
+              </div>
+      
+              <div class="container2">
+                <h4> <strong> Atendente diz: </strong> </h4>
+                <div class="msg-at">
+                  <p> Certo </p>
+                </div>
+                <h4> <strong> Atendente diz: </strong> </h4>
+                <div class="msg-at">
+                  <p> O que seria? </p>
+                </div>
+              </div>
+      
+              <div class="container">
+                <div class="vc">
+                  <h4> <strong> Você diz: </strong> </h4>
+                </div>
+                <div class="msg-vc">
+                  <p> Mas o que é Controle de Wave?
+      
+                    De maneira resumida, Controle de Wave é a habilidade de controlar as ondas de minions com o objetivo de adquirir algum tipo de vantagem em relação ao seu oponente.
+      
+                    E que fique claro, essa vantagem pode ser para absolutamente QUALQUER aspecto do jogo.
+      
+                    Segurança para você, para o seu Caçador, para o seu time, farm, vantagem de recursos como XP, ouro ou mana sobre o oponente, controle de visão, roaming, reset, etc. Praticamente qualquer ação do jogo depende do Controle de Wave. </p>
+                </div>
+                <div class="vc">
+                  <h4> <strong> Você diz: </strong> </h4>
+                </div>
+                <div class="msg-vc">
+                  <p> Brabo, vlw </p>
+                </div>
+                <div id="lista"></div>
+              </div>
+      
+            </main>
+          </div>
+          <div class="rodape">
+            <footer>
+              <form id="formLista">
+                <div>
+                  <input id="inputMsg" placeholder="Digite sua mensagem"></input>
+                </div>
+                <div>
+                  <button id="btnEnviar" type="submit"> Enviar </button>
+                </div>
+              </form>
+            </footer>
+          </div>
+      
+        </div>
+      </div>
+      <script>
+        function adicionaMsg(event) {
+  event.preventDefault();
+
+  const msg = document.querySelector("#inputMsg").value;
+
+  const vc = document.querySelector(".vc").value;
+
+  if (msg !== "") {
+    const lista = document.querySelector("#lista");
+
+    const msgvc = document.createElement("h4");
+    const novaMsg = document.createElement("p");
+    msgvc.innerHTML = `<strong> Você diz: </strong>`;
+    novaMsg.innerText = `${msg}`;
+
+    lista.appendChild(msgvc);
+    lista.appendChild(novaMsg);
+
+    corpo.scrollTop = corpo.scrollHeight;
+  }
+  formLista.reset();
+}
+
+const formLista = document.querySelector("#formLista");
+formLista.addEventListener("submit", adicionaMsg);
+
+const corpo = document.querySelector(".corpo");
+corpo.scrollTop = corpo.scrollHeight;
+
+      </script>
+</body>
+</html>
